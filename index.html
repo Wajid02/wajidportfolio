@@ -456,6 +456,68 @@ width: 16px;
             }
         }
 
+        /* --------------------------------- */
+/* NEW MOBILE MENU STYLES (REQUIRED) */
+/* --------------------------------- */
+
+/* 1. Hamburger button (only visible on mobile) */
+.nav-toggle {
+    display: none; /* Hide by default on large screens */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1000;
+}
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--accent);
+    border-radius: 5px;
+    position: relative;
+}
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--accent);
+    border-radius: 5px;
+    position: absolute;
+    transition: transform 0.3s ease
+}
+.hamburger::before { top: -8px; }
+.hamburger::after { top: 8px; }
+
+/* 2. Styles for the hidden menu on mobile */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block; /* Show hamburger icon on small screens */
+    }
+    .nav-links {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg-main);
+        display: none; /* Hidden by default on small screens */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        transition: transform 0.3s ease-in-out;
+    }
+    .nav-links-open {
+        display: flex; /* Shown when the JavaScript toggles this class */
+    }
+    .nav-links a {
+        padding: 15px;
+        font-size: 1.5rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -715,6 +777,26 @@ Wajid Mohammad, [11/28/2025 10:21 AM]
                     behavior: 'smooth'
                 });
             });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (navToggle && navLinks) {
+                // Toggles the menu open/closed when the button is clicked
+                navToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('nav-links-open');
+                });
+
+                // Closes the menu when a link is clicked
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('nav-links-open');
+                    });
+                });
+            }
         });
     </script>
 
