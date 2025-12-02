@@ -469,6 +469,10 @@ width: 16px;
     padding: 10px;
     z-index: 1000;
 }
+
+.nav-links-open {
+    display: flex !important;
+}
 .hamburger {
     display: block;
     width: 25px;
@@ -494,7 +498,7 @@ width: 16px;
 /* 2. Styles for the hidden menu on mobile */
 @media (max-width: 768px) {
     .nav-toggle {
-        display: block; /* Show hamburger icon on small screens */
+        display: block;
     }
     .nav-links {
         position: absolute;
@@ -503,35 +507,41 @@ width: 16px;
         width: 100%;
         height: 100vh;
         background-color: var(--bg-main);
-        display: none; /* Hidden by default on small screens */
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         z-index: 999;
-        transition: transform 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;
     }
-    
-    }
+
     .nav-links a {
-        padding: 15px;
         font-size: 1.5rem;
+        padding: 15px;
     }
+}
 
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Wajid Mohammad</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <div class="logo">Wajid Mohammad</div>
+
+    <!-- MOBILE MENU BUTTON -->
+    <button class="nav-toggle">
+        <span class="hamburger"></span>
+    </button>
+
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
     <section id="home">
         <div class="container hero-content">
@@ -548,7 +558,7 @@ For the next 6 months, I am mastering real-world AI, Machine Learning, Deep Lear
                 <a href="#contact" class="btn">Let's Connect</a>
             </div>
             <div class="hero-image-container">
-                <img src="photo.jpg.3.jpg" alt="Wajid Mohammad" class="hero-image">
+                <img src="photo.jpg.3.jpg " alt="Wajid Mohammad" class="hero-image">
             </div>
         </div>
     </section>
@@ -769,6 +779,8 @@ Wajid Mohammad, [11/28/2025 10:21 AM]
     </footer>
 
     <script>
+
+        navLinks.classList.toggle('nav-links-open');
         // Optional: Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
