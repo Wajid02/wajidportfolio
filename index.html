@@ -743,7 +743,7 @@ Wajid Mohammad, [11/28/2025 10:21 AM]
         <div class="container">
             <h2>Get In Touch</h2>
             <div class="contact-form">
-                <form>
+                <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" class="form-input" placeholder="Your Name">
@@ -779,8 +779,6 @@ Wajid Mohammad, [11/28/2025 10:21 AM]
     </footer>
 
     <script>
-
-        navLinks.classList.toggle('nav-links-open');
         // Optional: Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -809,6 +807,38 @@ Wajid Mohammad, [11/28/2025 10:21 AM]
                     });
                 });
             }
+        });
+    </script>
+
+    <!-- EmailJS: sends contact form submissions to your email -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("8owbwNBMyButY1zb2");
+        })();
+
+        document.getElementById("contactForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
+
+            emailjs.send("service_ab9eimc", "template_cv7quoy", {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                message: document.getElementById("message").value
+            }).then(function() {
+                alert("Message sent! Thanks for reaching out — I'll get back to you soon.");
+                e.target.reset();
+            }, function(error) {
+                alert("Something went wrong. Please try again or email me directly.");
+                console.error("EmailJS error:", error);
+            }).finally(function() {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
     </script>
 
